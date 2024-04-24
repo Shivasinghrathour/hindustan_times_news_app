@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:news_application/config/color.dart';
 import 'package:news_application/constant/divider.dart';
+import 'package:news_application/pages/article.dart';
 import 'package:news_application/widgets/imagebox.dart';
 import 'package:news_application/widgets/newsbox.dart';
 
@@ -11,11 +12,16 @@ class Topnews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
         children: [
           ImageBox(
+            ontap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ArticlePage()));
+            },
             newsName:
                 "Delhi HC junks PIL seeking Arvind Kejriwal's release on ‘extraordinary interim bail’, imposes ₹75,000 fine",
             image: NetworkImage(
@@ -55,6 +61,7 @@ class Topnews extends StatelessWidget {
           ),
 
           ImageBox(
+            ontap: () {},
             newsName:
                 "Delhi HC junks PIL seeking Arvind Kejriwal's release on ‘extraordinary interim bail’, imposes ₹75,000 fine",
             image: NetworkImage(

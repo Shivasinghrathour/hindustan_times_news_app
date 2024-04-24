@@ -82,6 +82,13 @@ var lightTheme = ThemeData(
       fontSize: 20,
       letterSpacing: 1,
     ),
+    // for aticle tag
+    titleSmall: TextStyle(
+        fontFamily: "OpenSans",
+        fontWeight: FontWeight.w400,
+        fontSize: 20,
+        letterSpacing: 1,
+        color: LprimaryColor),
   ),
 );
 

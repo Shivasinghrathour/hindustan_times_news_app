@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ImageBox extends StatelessWidget {
   final String newsName;
   final ImageProvider image;
   final String author;
   final String readtime;
+  final VoidCallback ontap;
   const ImageBox(
       {super.key,
       required this.newsName,
       required this.image,
       required this.author,
-      required this.readtime});
+      required this.readtime,
+      required this.ontap});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,7 @@ class ImageBox extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
+          color: Colors.pink,
           image: DecorationImage(
               colorFilter: ColorFilter.mode(Colors.black, BlendMode.difference),
               opacity: .4,
@@ -32,9 +36,12 @@ class ImageBox extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(right: 35),
-                child: Text(
-                  newsName,
-                  style: Theme.of(context).textTheme.displayLarge,
+                child: InkWell(
+                  onTap: ontap,
+                  child: Text(
+                    newsName,
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
                 ),
               ),
               SizedBox(

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:news_application/constant/appbar.dart';
+import 'package:news_application/controller/letestNews.dart';
 import 'package:news_application/pages/tabs/Topnews.dart';
 
 class LatestNews extends StatelessWidget {
@@ -9,6 +11,7 @@ class LatestNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    NewsController newsController = Get.put(NewsController());
     return DefaultTabController(
       length: 9,
       child: Scaffold(
@@ -33,7 +36,7 @@ class LatestNews extends StatelessWidget {
             // Election tab
             Topnews(),
             Text("Election"),
-          
+
             Text("Election Pincodeign"),
             Text("Photos"),
             Text("Latest News"),

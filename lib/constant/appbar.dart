@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../controller/letestNews.dart';
+
+class Mybar extends StatelessWidget {
+  const Mybar({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    NewsController newsController = Get.put(NewsController());
+    return mybar;
+  }
+}
 
 // My appbar widget
 AppBar mybar = AppBar(
+  // app name
   title: const Text("Hindustan"),
   actions: [
+    // e paper button
     Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -15,15 +30,21 @@ AppBar mybar = AppBar(
       ),
     ),
     SizedBox(width: 10),
+    // search button
     IconButton(
-      onPressed: () {},
+      onPressed: () {
+        NewsController newsController = Get.put(NewsController());
+        newsController.latestNews();
+      },
       icon: Icon(Icons.search),
     ),
+    // user profile button
     IconButton(
       onPressed: () {},
       icon: Icon(Icons.supervised_user_circle_sharp),
     ),
   ],
+  // tabs
   bottom: TabBar(
     isScrollable: true,
     tabs: [

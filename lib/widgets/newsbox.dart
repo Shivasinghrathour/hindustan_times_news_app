@@ -34,7 +34,7 @@ class NewsBox extends StatelessWidget {
                                 "By- Shivam",
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Text(
@@ -43,7 +43,7 @@ class NewsBox extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
+                          const Row(
                             children: [Icon(Icons.linear_scale_outlined)],
                           )
                         ],
@@ -52,17 +52,17 @@ class NewsBox extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               Expanded(
                 child: Container(
                   height: 100,
                   decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         fit: BoxFit.cover,
                         image: NetworkImage(
-                          "https://www.hindustantimes.com/ht-img/img/2024/04/19/550x309/India_Flag_1713518778477_1713518820010.jpeg",
+                          "https://www.hindustantimes.com/ht-img/img/2024/04/22/550x309/Amit_Shah_investment_portfolio_1713774601912_1713774602417.jpg",
                         ),
                       ),
                       color: Colors.pink,
