@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:news_application/config/color.dart';
+import 'package:news_application/model/newsmodel.dart';
 
 class ArticlePage extends StatelessWidget {
-  const ArticlePage({super.key});
+  final NewsModel news;
+  const ArticlePage({super.key, required this.news});
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +81,7 @@ class ArticlePage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 10, horizontal: 20),
                       child: Text(
-                        "Sam Pitroda's ‘inheritance tax’ remarks spark huge row, BJP slams Congress",
+                        news.title ?? "Unknow",
                         style: Theme.of(context).textTheme.headlineLarge,
                         textAlign: TextAlign.center,
                       ),
@@ -93,7 +95,7 @@ class ArticlePage extends StatelessWidget {
                     ),
                     // author name
                     Text(
-                      "BY SHIVAM TATHOUR",
+                      "BY: ${news.author!}",
                       style: Theme.of(context).textTheme.displaySmall,
                     ),
                     // post time
@@ -101,15 +103,11 @@ class ArticlePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "11 hours ago",
+                          news.publishedAt!,
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                         SizedBox(width: 15),
                         // read time
-                        Text(
-                          "6 mins read",
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
                       ],
                     ),
                   ],
@@ -123,9 +121,7 @@ class ArticlePage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.blue,
                 image: DecorationImage(
-                    image: NetworkImage(
-                        "https://www.hindustantimes.com/ht-img/img/2024/04/24/550x309/sam-pitroda-file-photo_45b0be94-4ff4-11e9-b593-e8dc2d81c30e_1713938424515.jpg"),
-                    fit: BoxFit.cover),
+                    image: NetworkImage(news.urlToImage!), fit: BoxFit.cover),
               ),
             ),
             // final article
@@ -135,8 +131,7 @@ class ArticlePage extends StatelessWidget {
                 children: [
                   SizedBox(width: 15),
                   Flexible(
-                    child: Text(
-                        '''“It is unfortunate that what I said as an individual on inheritance tax in the US is twisted by Godi media to divert attention from what lies PM is spreading about Congress manifesto. PM’s comments Mangal Sutra & gold snatching is simply unreal,” Sam Pitroda said in a post on X (formerly Twitter). Sam Pitroda's clarification comes after Bharatiya Janata Party leaders slammed him over his remarks on the redistribution of wealth where he reportedly advocated an inheritance tax law in the country, even as the Congress sought to distance itself from the comments saying that his views do not always reflect the position of the party.''',
+                    child: Text(news.content ?? "No Content...",
                         style: Theme.of(context).textTheme.headlineSmall),
                   ),
                 ],

@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:news_application/config/color.dart';
 import 'package:news_application/constant/divider.dart';
+import 'package:news_application/controller/letestNews.dart';
+import 'package:news_application/model/newsmodel.dart';
 import 'package:news_application/pages/article.dart';
 import 'package:news_application/widgets/imagebox.dart';
 import 'package:news_application/widgets/newsbox.dart';
@@ -12,31 +15,52 @@ class Topnews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    NewsController newsController = Get.put(NewsController());
+    NewsModel newsModel = Get.put(NewsModel());
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
         children: [
-          ImageBox(
-            ontap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ArticlePage()));
-            },
-            newsName:
-                "Delhi HC junks PIL seeking Arvind Kejriwal's release on ‘extraordinary interim bail’, imposes ₹75,000 fine",
-            image: NetworkImage(
-                "https://www.hindustantimes.com/ht-img/img/2024/04/22/550x309/Amit_Shah_investment_portfolio_1713774601912_1713774602417.jpg"),
-            author: "Shivam ",
-            readtime: "4 min read",
+          // image box news
+          Obx(
+            () => Column(
+                children: newsController.tradingNews5
+                    .map(
+                      (e) => ImageBox(
+                        ontap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ArticlePage(
+                                        news: e,
+                                      )));
+                        },
+                        newsName: e.title ?? "No title",
+                        image: NetworkImage(e.urlToImage!),
+                        author: e.author ?? "Unknow",
+                        readtime: e.publishedAt!,
+                      ),
+                    )
+                    .toList()),
           ),
           mydivider,
           //newsbox
-          NewsBox(),
-          mydivider,
-          NewsBox(),
-          mydivider,
-          NewsBox(),
-          mydivider,
+          Obx(
+            () => Column(
+                children: newsController.tradingNewsList
+                    .map(
+                      (p) => NewsBox(
+                          ontap: () {
+                            Get.to(ArticlePage(news: p));
+                          },
+                          newsTitle: p.title ?? "Unknow ",
+                          authorNmae: p.author ?? "Unknow",
+                          timeToRead: p.publishedAt!,
+                          imageProvider: NetworkImage(p.urlToImage!)),
+                    )
+                    .toList()),
+          ),
+
           // Politics tab
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -61,7 +85,9 @@ class Topnews extends StatelessWidget {
           ),
 
           ImageBox(
-            ontap: () {},
+            ontap: () {
+              Get.to(ArticlePage(news: newsModel));
+            },
             newsName:
                 "Delhi HC junks PIL seeking Arvind Kejriwal's release on ‘extraordinary interim bail’, imposes ₹75,000 fine",
             image: NetworkImage(
@@ -70,11 +96,7 @@ class Topnews extends StatelessWidget {
             readtime: "4 min read",
           ),
           mydivider,
-          NewsBox(),
-          mydivider,
-          NewsBox(),
-          mydivider,
-          NewsBox(),
+
           mydivider,
           SizedBox(height: 20),
           // infographics tab

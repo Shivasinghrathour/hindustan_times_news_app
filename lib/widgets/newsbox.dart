@@ -1,11 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:news_application/constant/divider.dart';
+import 'package:news_application/controller/letestNews.dart';
 
 class NewsBox extends StatelessWidget {
-  const NewsBox({super.key});
+  final String newsTitle;
+  final String authorNmae;
+  final ImageProvider imageProvider;
+  final String timeToRead;
+  final VoidCallback ontap;
+  const NewsBox({
+    super.key,
+    required this.newsTitle,
+    required this.authorNmae,
+    required this.timeToRead,
+    required this.imageProvider,
+    required this.ontap,
+  });
 
   @override
   Widget build(BuildContext context) {
+    NewsController newsController = Get.put(NewsController());
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -18,11 +37,14 @@ class NewsBox extends StatelessWidget {
                 child: Container(
                   child: Column(
                     children: [
-                      Text(
-                        "Lok Sabha elections: BJP gets first seat, Surat candidate wins unopposed",
-                        style: Theme.of(context).textTheme.displayMedium,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
+                      InkWell(
+                        onTap: ontap,
+                        child: Text(
+                          newsTitle,
+                          style: Theme.of(context).textTheme.displayMedium,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                        ),
                       ),
                       SizedBox(height: 10),
                       Row(
@@ -31,14 +53,14 @@ class NewsBox extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "By- Shivam",
+                                "By- ${authorNmae}",
                                 style: Theme.of(context).textTheme.bodyMedium,
                               ),
                               const SizedBox(
                                 width: 10,
                               ),
                               Text(
-                                "4 min read ",
+                                timeToRead,
                                 style: Theme.of(context).textTheme.bodySmall,
                               ),
                             ],
@@ -56,21 +78,23 @@ class NewsBox extends StatelessWidget {
                 width: 10,
               ),
               Expanded(
-                child: Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                          "https://www.hindustantimes.com/ht-img/img/2024/04/22/550x309/Amit_Shah_investment_portfolio_1713774601912_1713774602417.jpg",
+                child: InkWell(
+                  onTap: ontap,
+                  child: Container(
+                    height: 100,
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: imageProvider,
                         ),
-                      ),
-                      color: Colors.pink,
-                      borderRadius: BorderRadius.circular(15)),
+                        color: Colors.pink,
+                        borderRadius: BorderRadius.circular(15)),
+                  ),
                 ),
               ),
             ],
           ),
+          mydivider
         ],
       ),
     );

@@ -21,7 +21,7 @@ var lightTheme = ThemeData(
       color: LbgColor,
     ),
     // for image heading text
-    displayLarge: TextStyle(
+    headlineMedium: TextStyle(
       fontFamily: "OpenSans",
       fontWeight: FontWeight.w800,
       letterSpacing: 1.5,

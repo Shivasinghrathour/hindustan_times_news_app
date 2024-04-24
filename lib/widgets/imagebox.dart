@@ -40,7 +40,7 @@ class ImageBox extends StatelessWidget {
                   onTap: ontap,
                   child: Text(
                     newsName,
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Theme.of(context).textTheme.headlineLarge,
                   ),
                 ),
               ),
